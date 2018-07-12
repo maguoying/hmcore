@@ -1,47 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html>
 <head>
-<meta charset="utf-8">
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-<title>登录</title>
-<script src="angular/angular.js"></script>
-<link rel="stylesheet" type="text/css" href="public/styles/index.css"/>
+    <meta charset="UTF-8">
+    <title>黑莓拆迁队</title>
+    <link rel="stylesheet" href="public/styles/common.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="public/styles/ey-ui.min.css">
 </head>
 
-<body ng-app="myApp">
-	<div>
-		<ul id="loginForm" ng-controller="LoginForm">
-			<li>用户名：<input type="text" name="uname" ng-model="uname" /></li>
-			<li>密　码：<input type="password" name="pword" ng-model="pword" /></li>
-			<li id="loginBtn"><input type="button" value="提交" ng-click="submit()"/> <input type="button" value="重置" ng-click="resetInfo()"/></li>
-		</ul>
-	</div>
-	
-<script>
-angular.module("myApp", [])
-	.controller("LoginForm", function($scope,$http) {
+<body>
+    <!-- top nav -->
+    <div ng-controller="topCtrl">
+        <div ng-include="topTemplate"></div>
+    </div>
 
-	$scope.resetInfo=function()
-	{
-		$scope.uname="";
-		$scope.pword="";
-	}
-	
-	$scope.submit=function()
-	{
-		var postData = "?uname="+$scope.uname+"&"+"pword="+$scope.pword;
-		var url = "loginAction.do" + postData;
-		
-		$http.post(url,postData).then(function(response) 
-		{
-			alert(response.data);
-		});
-		
-	}
+    <!-- center contain -->
+    <div ui-view></div>
 
-});
-</script>
+    <!-- bottom nav -->
+    <div ng-controller="bottomCtrl">
+        <div ng-include="bottomTemplate"></div>
+    </div>
+
+    <script src="public/scripts/require.js"></script>
+    <script src="public/scripts/jquery.js"></script>
+    <script src="public/angular/angular.js"></script>
+    <script src="public/angular/angular-ui-router.js"></script>
+    <script src="public/scripts/ocLazyLoad.js"></script>
+    <script src="public/scripts/ey-ui.all.js"></script> <!-- 如果不想自己写指令插件，这里推荐我个人觉得很不错的第三方插件： angular-uihttp://angular-ui.github.io/bootstrap/-->
+    <script src="public/scripts/main.js"></script>
 </body>
 </html>
